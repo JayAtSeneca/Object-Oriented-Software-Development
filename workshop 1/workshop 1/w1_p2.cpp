@@ -22,7 +22,7 @@
 // TODO: write the prototype for the main function
 //         to accept command line arguments
 
-int main(int argc, char* argv[]){
+int main(int argc,char* argv[]){
 	std::cout << "Command Line:\n";
 	std::cout << "--------------------------\n";
 	// TODO: print the command line here, in the format
@@ -30,13 +30,12 @@ int main(int argc, char* argv[]){
 	//   2: second argument
 	//   3: third argument
 	//   ...
-
-	for (int i = 0; i < argc; i++) 
-	{
+	for (int i = 0; i < argc; i++) {
 		std::cout.width(3);
 		std::cout << (i + 1);
 		std::cout << ": " << argv[i] << std::endl;
 	}
+
 	std::cout << "--------------------------\n\n";
 
 	// Keep a record of the In House and Delivery orders separately
