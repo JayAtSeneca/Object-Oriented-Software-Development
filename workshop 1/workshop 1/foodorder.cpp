@@ -52,7 +52,7 @@ namespace sdds
     std::ostream& FoodOrder::display(std::ostream& ostr)const
     {
 		static int counter = 0;
-		if (this->m_name) {
+		if (this->m_name[0] != '\0') {
 			
 			ostr.setf(ios::fixed);
 			ostr.width(2);
@@ -74,8 +74,9 @@ namespace sdds
 			if (m_special)
 			{
 				ostr.setf(ios::fixed);
+				ostr.width(13);
 				ostr.precision(2);
-				ostr << (m_price * (1.0 + g_taxrate) - g_dailydiscount);
+				ostr << right << (m_price * (1.0 + g_taxrate) - g_dailydiscount);
 				ostr.unsetf(ios::fixed);
 			}
 			ostr << endl;
