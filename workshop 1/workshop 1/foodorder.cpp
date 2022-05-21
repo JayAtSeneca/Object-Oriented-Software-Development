@@ -69,14 +69,14 @@ namespace sdds
 			ostr.setf(ios::fixed);
 			ostr.width(12);
 			ostr.precision(2);
-			ostr << left << (m_price * (1.0 + g_taxrate)) << '|';
+			ostr << left << (m_price + (m_price * g_taxrate)) << '|';
 			ostr.unsetf(ios::fixed);
 			if (m_special)
 			{
 				ostr.setf(ios::fixed);
 				ostr.width(13);
 				ostr.precision(2);
-				ostr << right << (m_price * (1.0 + g_taxrate) - g_dailydiscount);
+				ostr << right << (m_price + (m_price * g_taxrate) - g_dailydiscount);
 				ostr.unsetf(ios::fixed);
 			}
 			ostr << endl;
