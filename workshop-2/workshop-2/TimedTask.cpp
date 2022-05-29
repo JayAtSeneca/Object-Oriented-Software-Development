@@ -1,5 +1,5 @@
-#include <iostream>
 #include "TimedTask.h"
+using namespace std;
 
 namespace sdds {
 
@@ -15,7 +15,7 @@ namespace sdds {
 
 	void TimedTask::addTask(const char* taskName) {
 
-		if (m_recordNum < MAX_OBJ) {
+		if (m_recordNum < MAX_OBJECTS) {
 			taskList[m_recordNum].m_task = taskName;
 			taskList[m_recordNum].m_timeUnit = "nanoseconds";
 			taskList[m_recordNum].m_duration = 

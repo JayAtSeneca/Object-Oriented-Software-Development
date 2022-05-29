@@ -1,30 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include "ProteinDatabase.h"
+using namespace std;
 
 namespace sdds {
 
 	ProteinDatabase::ProteinDatabase() {}
 	ProteinDatabase::ProteinDatabase(const char* fileName) {
-		readFile(fileName);
-	}
-
-	unsigned int ProteinDatabase::size()const {
-		return m_size;
-	}
-
-	std::string ProteinDatabase::operator[](unsigned int index)const {
-		std::string str = (index < m_size) ? m_proteinArr[index] : "";
-		return str;
-	}
-
-
-	void ProteinDatabase::readFile(const char* fileName) {
 		std::ifstream ifstr(fileName);
 		std::string temp;
 		if (ifstr) {
 			while (getline(ifstr, temp, '\n')) {
-				if (temp[0] == '>') 
+				if (temp[0] == '>')
 					m_size++;
 			}
 
@@ -32,7 +19,7 @@ namespace sdds {
 				ifstr.clear();
 				ifstr.seekg(0);
 				m_proteinArr = new std::string[m_size];
-				
+
 				int index = -1;
 				while (getline(ifstr, temp, '\n')) {
 					if (temp[0] == '>') {
@@ -44,6 +31,15 @@ namespace sdds {
 				}
 			}
 		}
+	}
+
+	unsigned int ProteinDatabase::size()const {
+		return m_size;
+	}
+
+	std::string ProteinDatabase::operator[](unsigned int index)const {
+		std::string str = (index < m_size) ? m_proteinArr[index] : "";
+		return str;
 	}
 
 	void ProteinDatabase::safeEmpty() {
@@ -68,11 +64,11 @@ namespace sdds {
 		return *this;
 	}
 
-	ProteinDatabase::ProteinDatabase(ProteinDatabase&& src) {
+	ProteinDatabase::ProteinDatabase(ProteinDatabase&& src) noexcept{
 		*this = std::move(src);
 	}
 
-	ProteinDatabase& ProteinDatabase::operator=(ProteinDatabase&& src) {
+	ProteinDatabase& ProteinDatabase::operator=(ProteinDatabase&& src) noexcept {
 		if (this != &src) {
 			safeEmpty();
 			m_size = src.m_size;
