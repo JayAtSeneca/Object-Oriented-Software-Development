@@ -7,18 +7,18 @@
 namespace sdds {
 
 	const int MAX_OBJECTS = 10;
-
+	struct Task {
+		std::string m_task;
+		std::string m_timeUnit;
+		std::chrono::steady_clock::duration m_duration;
+	};
 	class TimedTask {
 
 		unsigned int m_recordNum = 0u;
 		std::chrono::steady_clock::time_point m_startTime;
 		std::chrono::steady_clock::time_point m_endTime;
 
-		struct {
-			std::string m_task;
-			std::string m_timeUnit;
-			std::chrono::steady_clock::duration m_duration;
-		} taskList[MAX_OBJECTS]{};
+		struct Task taskList[MAX_OBJECTS]{};
 
 	public:
 		TimedTask();
