@@ -22,5 +22,19 @@ public:
         os<<std::endl;
         return os;
     }
+    void add(const T* arr1, const T* arr2){
+        for(int i = 0; i<N;i++){
+            result[i] = arr1[i] + arr2[i];
+        }
+        uses++;
+    }
+    static int used(){return uses;}
+};
+template <typename T, int N>
+int Calculator<T,N>::uses = 0;
+
+template <typename T, int N>
+std::ostream& operator<<(std::ostream& os, Calculator<T,N>& calc){
+    return calc.display(os);
 }
 #endif // !CALCULATOR_H
