@@ -30,6 +30,9 @@
     <ClCompile Include="PlayPack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PlaydohPackAgg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Playdoh.h">
@@ -40,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="PlaydohPack.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaydohPackAgg.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
