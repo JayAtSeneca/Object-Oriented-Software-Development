@@ -33,6 +33,9 @@
     <ClCompile Include="PlaydohPackAgg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ToyBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Playdoh.h">
@@ -45,6 +48,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="PlaydohPackAgg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ToyBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -145,12 +145,14 @@
     <ClCompile Include="PlaydohMain.cpp" />
     <ClCompile Include="PlaydohPackAgg.cpp" />
     <ClCompile Include="PlayPack.cpp" />
+    <ClCompile Include="ToyBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayAssoc.h" />
     <ClInclude Include="Playdoh.h" />
     <ClInclude Include="PlaydohPack.h" />
     <ClInclude Include="PlaydohPackAgg.h" />
+    <ClInclude Include="ToyBox.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
