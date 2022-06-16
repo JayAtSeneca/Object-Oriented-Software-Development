@@ -143,6 +143,14 @@
     <ClCompile Include="FuncObj.cpp" />
     <ClCompile Include="FuncPtr.cpp" />
     <ClCompile Include="Lambda.cpp" />
+    <ClCompile Include="Playdoh-FuncSyntax.cpp" />
+    <ClCompile Include="Porridge.cpp" />
+    <ClCompile Include="Recursion.cpp" />
+    <ClCompile Include="staticA.cpp" />
+    <ClCompile Include="staticB.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Porridge.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
