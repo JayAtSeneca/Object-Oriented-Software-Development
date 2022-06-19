@@ -14,7 +14,7 @@ namespace sdds {
 		std::string m_description{};
 		std::string& trim(std::string& str)const;
 	public:
-		Book() { }
+		Book() {};
 		const std::string& title() const;
 		const std::string& country() const;
 		const size_t& year() const;
