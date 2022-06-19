@@ -28,9 +28,6 @@ namespace sdds
         Collection<T>(const Collection<T>&) = delete;
         Collection<T>(Collection<T>&&) = delete;
 
-        // friend helper function
-        template <typename T>
-        friend std::ostream& operator<<(std::ostream& os, const Collection<T>& coll);
     };
 
     template <typename T>
@@ -109,16 +106,16 @@ namespace sdds
     template <typename T>
     T* Collection<T>::operator[](const std::string& title) const
     {
+        T* temp = nullptr;
         size_t i = 0u;
         for (; i < m_size; i++)
         {
             if (m_arr[i].title() == title)
             {
-                return &m_arr[i];
+                temp = &m_arr[i];
             }
         }
-        if (i == m_size)
-            return nullptr;
+        return temp;
     }
     template <typename T>
     std::ostream& operator<<(std::ostream& os, const Collection<T>& coll)
