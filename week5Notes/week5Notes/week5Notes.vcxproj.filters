@@ -42,6 +42,9 @@
     <ClCompile Include="staticB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="w5_p2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Porridge.h">

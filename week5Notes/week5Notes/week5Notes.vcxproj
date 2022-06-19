@@ -148,6 +148,7 @@
     <ClCompile Include="Recursion.cpp" />
     <ClCompile Include="staticA.cpp" />
     <ClCompile Include="staticB.cpp" />
+    <ClCompile Include="w5_p2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Porridge.h" />
