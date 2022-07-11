@@ -30,7 +30,6 @@ namespace sdds {
 			msg += type;
 			msg += "]";
 			throw msg;
-			//throw std::out_of_range(msg);
 		}
 		return vehicle;
 	}
