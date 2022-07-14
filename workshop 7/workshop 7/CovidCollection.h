@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <list>
 #include <string>
 
 namespace sdds {
@@ -21,6 +22,11 @@ namespace sdds {
 	public:
 		CovidCollection(const char* fileName);
 		void display(std::ostream& out)const;
+		void sort(const char* fieldName);
+		void cleanList();
+		bool inCollection(const char* variantName) const;
+		std::list<Covid> getListForCountry(const char* countryName) const;
+		std::list<Covid> getListForVariant(const char* variantName) const;
 	};
 	std::ostream& operator<<(std::ostream& out, const Covid& theCovid);
 }
