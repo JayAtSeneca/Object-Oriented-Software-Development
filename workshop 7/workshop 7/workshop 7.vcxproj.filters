@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="w7_p1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CovidCollection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -144,7 +144,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CovidCollection.cpp" />
-    <ClCompile Include="w7_p1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CovidCollection.h" />
