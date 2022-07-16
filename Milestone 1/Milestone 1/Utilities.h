@@ -8,6 +8,7 @@ namespace sdds {
 	class Utilities {
 		size_t m_widthField{ 1 };
 		static char m_delimiter;
+		std::string trim(std::string& str)const;
 	public:
 		void setFieldWidth(size_t newWidth);
 		size_t getFieldWidth()const;
