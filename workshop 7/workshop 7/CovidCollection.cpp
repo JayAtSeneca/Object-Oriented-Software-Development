@@ -27,7 +27,7 @@ namespace sdds {
 					temp.m_variant = trim(str.substr(50, 25));
 					temp.m_year = std::stoi(trim(str.substr(75, 5)));
 					temp.m_numOfCases = std::stoul(trim(str.substr(80, 5)));
-					temp.m_numOfDeaths = std::stoul(trim(str.substr(85, 5)));
+					temp.m_deaths = std::stoul(trim(str.substr(85, 5)));
 					m_collection.push_back(temp);
 				}
 			}
@@ -51,33 +51,47 @@ namespace sdds {
 	bool CovidCollection::inCollection(const char* variantName) const
 	{
 		return std::any_of(m_collection.begin(), m_collection.end(), [variantName](Covid covid) {
-			return covid.m_variant.c_str() == variantName;
+			return  covid.m_variant == std::string(variantName);
 		});
 	}
 
 	std::list<Covid> CovidCollection::getListForCountry(const char* countryName) const
 	{
-		std::list<Covid> val{};
-		std::copy_if(m_collection.begin(), m_collection.end(), std::inserter(val, val.begin()), [=](const Covid& covid) {return covid.m_country.c_str() == countryName; });
-		return val;
-	}
-
-	std::list<Covid> CovidCollection::getListForVariant(const char* variantName) const
-	{
 		std::vector<Covid> copy(m_collection.begin(), m_collection.end());
 		std::list<Covid> collection{};
-		std::remove_if(copy.begin(), copy.end(), [=](const Covid& covid) {
-			return covid.m_variant.c_str() != variantName;
+		std::remove_if(copy.begin(), copy.end(), [&](Covid& covid) {
+			return covid.m_country != std::string(countryName);
 		});
 		std::copy(copy.begin(), copy.end(), std::back_inserter(collection));
 		return collection;
 	}
 
+	std::list<Covid> CovidCollection::getListForVariant(const std::string variantName) const
+	{
+		std::list<Covid> collection{};
+		std::copy_if(m_collection.begin(), m_collection.end(), std::inserter(collection, collection.begin()), [=](const Covid& covid) {return covid.m_variant == variantName; });
+		return collection;
+	}
+
+	//std::list<Covid> getListForVariant(const std::string variantName) const
+	//{
+	//	/*std::vector<Covid> copy(m_collection.begin(), m_collection.end());
+	//	std::list<Covid> collection{};
+	//	std::remove_if(copy.begin(), copy.end(), [&](Covid& covid) {
+	//		return covid.m_variant != std::string(variantName);
+	//	});
+	//	std::copy(copy.begin(), copy.end(), std::back_inserter(collection));
+	//	return collection;*/
+	//	std::list<Covid> val{};
+	//	std::copy_if(m_collection.begin(), m_collection.end(), std::inserter(val, val.begin()), [=](const Covid& ele) {return ele.m_variant == variantName; });
+	//	return val;
+	//}
+
 	void CovidCollection::display(std::ostream& out)const {
 		std::for_each(m_collection.begin(), m_collection.end(), [&](const Covid& covid) { out << covid << std::endl; });
 		size_t totalCases = 0u, totalDeaths = 0u;
 		std::for_each(m_collection.begin(), m_collection.end(), [&](const Covid& covid) {totalCases += covid.m_numOfCases; });
-		std::for_each(m_collection.begin(), m_collection.end(), [&](const Covid& covid) {totalDeaths += covid.m_numOfDeaths; });
+		std::for_each(m_collection.begin(), m_collection.end(), [&](const Covid& covid) {totalDeaths += covid.m_deaths; });
 		out.fill('-');
 		out << std::setw(88) << "" << std::endl;
 		out.fill(' ');
@@ -107,7 +121,7 @@ namespace sdds {
 		out << theCovid.m_numOfCases;
 		out << " | ";
 		out.width(3);
-		out << theCovid.m_numOfDeaths;
+		out << theCovid.m_deaths;
 		out << " | ";
 		out.unsetf(ios::right);
 		return out;
@@ -124,7 +138,7 @@ namespace sdds {
 			std::sort(m_collection.begin(), m_collection.end(), [](const Covid& a, const Covid& b) {return a.m_numOfCases < b.m_numOfCases; });
 		}
 		else if (fieldName == "deaths") {
-			std::sort(m_collection.begin(), m_collection.end(), [](const Covid& a, const Covid& b) {return a.m_numOfDeaths < b.m_numOfDeaths; });
+			std::sort(m_collection.begin(), m_collection.end(), [](const Covid& a, const Covid& b) {return a.m_deaths < b.m_deaths; });
 		}
 		else {
 			throw "Error: no field exists";

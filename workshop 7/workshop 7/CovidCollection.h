@@ -13,7 +13,7 @@ namespace sdds {
 		std::string m_variant{};
 		size_t m_numOfCases{};
 		size_t m_year{};
-		size_t m_numOfDeaths{};
+		size_t m_deaths{};
 	};
 
 	class CovidCollection {
@@ -26,7 +26,7 @@ namespace sdds {
 		void cleanList();
 		bool inCollection(const char* variantName) const;
 		std::list<Covid> getListForCountry(const char* countryName) const;
-		std::list<Covid> getListForVariant(const char* variantName) const;
+		std::list<Covid> getListForVariant(const std::string variantName) const;
 	};
 	std::ostream& operator<<(std::ostream& out, const Covid& theCovid);
 }
