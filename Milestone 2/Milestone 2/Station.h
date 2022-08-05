@@ -8,8 +8,8 @@ namespace sdds
         int m_id;
         std::string m_name{};
         std::string m_desc{};
-        size_t m_nextNum{ 0u };
-        size_t m_stockNum{ 0u };
+        size_t m_serialNum{};
+        size_t m_stockNum{};
         static size_t m_widthField;
         static size_t id_generator;
     public:

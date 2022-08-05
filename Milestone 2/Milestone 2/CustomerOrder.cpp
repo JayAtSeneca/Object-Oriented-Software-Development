@@ -10,27 +10,27 @@ namespace sdds
     CustomerOrder::CustomerOrder() {}
     CustomerOrder::CustomerOrder(const std::string& str)
     {
-        Utilities u;
+        Utilities ut;
         size_t p = 0;
         bool more = false;
         std::string temp;
 
-        m_name = u.extractToken(str, p, more);
-        m_product = u.extractToken(str, p, more);
+        m_name = ut.extractToken(str, p, more);
+        m_product = ut.extractToken(str, p, more);
 
         temp = str.substr(p, str.length() - p);
-        m_cntItem = (std::count(temp.begin(), temp.end(), u.getDelimiter())) + 1;
+        m_cntItem = (std::count(temp.begin(), temp.end(), ut.getDelimiter())) + 1;
 
         m_lstItem = new Item * [m_cntItem];
         for (size_t i = 0; i < m_cntItem; i++)
         {
-            m_lstItem[i] = new Item(u.extractToken(str, p, more));
+            m_lstItem[i] = new Item(ut.extractToken(str, p, more));
         }
-        m_widthField = (m_widthField < u.getFieldWidth()) ? u.getFieldWidth() : m_widthField;
+        m_widthField = (m_widthField < ut.getFieldWidth()) ? ut.getFieldWidth() : m_widthField;
     }
     CustomerOrder::CustomerOrder(const CustomerOrder& src)
     {
-        throw std::string("Copy is not allowed!");
+        throw std::string("Cannot make copy!");
     }
     CustomerOrder::CustomerOrder(CustomerOrder&& src) noexcept
     {
@@ -40,10 +40,12 @@ namespace sdds
     {
         if (this != &src)
         {
-            for (size_t i = 0; i < m_cntItem; i++) {
-                delete m_lstItem[i];
+            if (m_lstItem) {
+                for (size_t i = 0; i < m_cntItem; i++) {
+                    delete m_lstItem[i];
+                }
+                delete[] m_lstItem;
             }
-            delete[] m_lstItem;
 
             m_name = src.m_name;
             m_product = src.m_product;
@@ -62,15 +64,14 @@ namespace sdds
             delete m_lstItem[i];
         }
         delete[] m_lstItem;
-        m_lstItem = nullptr;
     }
     bool CustomerOrder::isOrderFilled() const
     {
-        bool isFilled = true;
-        for (size_t i = 0; i < m_cntItem && isFilled; i++) {
-            isFilled = m_lstItem[i]->m_isFilled;
+        bool isOrderFilled = true;
+        for (size_t i = 0; i < m_cntItem && isOrderFilled; i++) {
+            isOrderFilled = m_lstItem[i]->m_isFilled;
         }
-        return isFilled;
+        return isOrderFilled;
     }
     bool CustomerOrder::isItemFilled(const std::string& itemName) const
     {
@@ -88,6 +89,7 @@ namespace sdds
         {
             if (station.getItemName() == m_lstItem[i]->m_itemName)
             {
+                flag = false;
                 if (station.getQuantity() > 0)
                 {
                     m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
@@ -101,8 +103,6 @@ namespace sdds
                     os << "Unable to fill " << m_name << ", ";
                     os << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
                 }
-                flag = false;
-                //return;
             }
         }
     }

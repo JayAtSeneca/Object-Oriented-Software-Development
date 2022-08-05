@@ -4,13 +4,13 @@
 
 
 #include "process_data.h"
-using namespace std::placeholders;
 
 namespace sdds_ws9 {
 
 	void computeAvgFactor(const int* arr, int size, int divisor, double& avg) {
 		avg = 0;
 		for (int i = 0; i < size; i++) {
+			
 			avg += arr[i];
 		}
 		avg /= divisor;
@@ -19,6 +19,7 @@ namespace sdds_ws9 {
 	void computeVarFactor(const int* arr, int size, int divisor, double avg, double& var) {
 		var = 0;
 		for (int i = 0; i < size; i++) {
+			
 			var += (arr[i] - avg) * (arr[i] - avg);
 		}
 		var /= divisor;

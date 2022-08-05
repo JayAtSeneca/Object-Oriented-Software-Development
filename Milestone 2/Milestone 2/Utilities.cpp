@@ -32,7 +32,7 @@ namespace sdds
 			token.erase(token.begin(), token.begin() + next_pos);
 			size_t end = token.find_last_not_of(" ");
 			token.erase(end + 1);
-			m_widthField = std::max(m_widthField, token.length());  // Returns the first one if both the numbers are same
+			m_widthField = std::max(m_widthField, token.length());
 			next_pos = position + 1;
 			more = true;
 		}
