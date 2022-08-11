@@ -1,17 +1,23 @@
-// Smart Pointers
- // Title.h
+// Smart Pointers - Unsafe Exception
+ // unsafe_exception.cpp
 
  #include <iostream>
+ #include "Title.h"
 
- class Title {
-     const char* title;
-     const char* validTitle() const {
-         if (!title[0]) throw "invalid title"; 
-         return title;
+ void display(const char* s) {
+     Title* t = new Title(s);
+     t->display(); // may throw an exception!
+     delete t;
+ }
+
+ int main() {
+     const char* s[] = {"Mr.", "Ms.", "", "Dr."}; 
+
+     for (auto x : s) {
+         try {
+             display(x);
+         } catch(const char* msg) {
+             std::cerr << msg << std::endl; 
+         }
      }
-   public:
-     Title(const char* s) : title(s) {}
-     void display() const {
-         std::cout << validTitle() << std::endl; 
-     }
- };
+ }
