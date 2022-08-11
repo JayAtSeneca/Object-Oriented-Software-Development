@@ -1,14 +1,17 @@
-#include <iostream>
-using namespace std;
+// Smart Pointers
+ // Title.h
 
-void swap(int &a, int &b){
-    int temp = a;
-    a = b;
-    b = temp;
-}
+ #include <iostream>
 
-int main(){
-    int* a = *((int) 3);
-    int* b = *((int) 5);
-    return 0;
-}
+ class Title {
+     const char* title;
+     const char* validTitle() const {
+         if (!title[0]) throw "invalid title"; 
+         return title;
+     }
+   public:
+     Title(const char* s) : title(s) {}
+     void display() const {
+         std::cout << validTitle() << std::endl; 
+     }
+ };
