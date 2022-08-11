@@ -1,28 +1,32 @@
-// Smart Pointers - Safe Exception
- // safe_exception.cpp
+// Smart Pointer
+ // SmartPtr.h
 
- #include <iostream>
- #include "Title.h"
-
- void display(const char* s) {
-     Title* t = new Title(s);
-     try {
-         t->display();
-     } catch(...) {
-         delete t;
-         throw; // continue throwing
+ template <typename T>
+ class SmartPtr {
+     T* p { nullptr };
+   public:
+     explicit SmartPtr(T* ptr) : p(ptr) { } ; 
+     SmartPtr(const SmartPtr&) = delete;
+     SmartPtr& operator=(const SmartPtr&) = delete; 
+     SmartPtr(SmartPtr&& s) noexcept {
+         p = s.p;
+         s.p = nullptr;
      }
-     delete t;
- }
-
- int main() {
-     const char* s[] = {"Mr.", "Ms.", "", "Dr."}; 
-
-     for (auto x : s) {
-         try {
-             display(x);
-         } catch(const char* msg) {
-             std::cerr << msg << std::endl;
+     SmartPtr& operator=(SmartPtr&& s) noexcept { 
+         if (this != &s) {
+             delete p;
+             p = s.p;
+             s.p = nullptr;
          }
+         return *this;
      }
- }
+     ~SmartPtr() {
+         delete p;
+     }
+     T& operator*() {
+         return *p;
+     }
+     T* operator->() {
+         return p;
+     }
+ };
