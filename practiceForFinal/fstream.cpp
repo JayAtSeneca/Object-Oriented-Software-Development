@@ -1,23 +1,26 @@
-// Thread Class
- // thread.cpp
+// Thread Class - Thread Identifiers
+ // thread_id.cpp
 
  #include <iostream>
- #include <string>
  #include <thread>
+ #include <vector>
 
- void task(const std::string& str) {
-     std::cout << str + " says Hi\n";
+ const int NT = 10;
+
+ void task() {
+     std::cout << "Thread id = " <<
+      std::this_thread::get_id() << std::endl; 
  }
 
  int main() {
-     // spawn child thread t1
-     std::thread t1(task, "t1");
-     // spawn child thread t2
-     std::thread t2(task, "t2");
-     // continue executing main thread
-     task("main");
+     // create a vector of threads
+     std::vector<std::thread> threads;
 
-     // synchronize - IMPORTANT!
-     t2.join();
-     t1.join();
+     // launch execution of each thread
+     for (int i = 0; i < NT; i++)
+         threads.push_back(std::thread(task)); 
+
+     // synchronize their execution here
+     for (auto& thread : threads)
+         thread.join();
  }
