@@ -1,36 +1,24 @@
-// Future Class Template - Explicit Asynchronous Launch
- // future_async.cpp
+// Thread Local Storage Duration
+ // thread_local.cpp
 
  #include <iostream>
- #include <future>
+ #include <sstream>
+ #include <thread>
 
- double get() { return 12.34; }
+ thread_local int k = 0;
+
+ void task(int i) {
+     k = i;
+     std::stringstream s;
+     s << k << " at " << &k << std::endl; 
+     std::cout << s.str();
+ }
 
  int main() {
-     std::future<double> f; // default ctor
-     std::future<double> g = std::async(get); // move-ctor 
-
-     std::cout << "After Construction" << std::endl;
-     std::cout << (f.valid() ? "f is valid" :
-      "f is not valid") << std::endl; 
-     std::cout << (g.valid() ? "g is valid" :
-      "g is not valid") << std::endl; 
-
-     f = std::move(g); // move-assignment
-
-     std::cout << "After Assignment" << std::endl;
-     std::cout << (f.valid() ? "f is valid" :
-      "f is not valid") << std::endl; 
-     std::cout << (g.valid() ? "g is valid" :
-      "g is not valid") << std::endl; 
-
-     double a = f.get(); // retrieve shared value
-
-     std::cout << "After Retrieval" << std::endl;
-     std::cout << (f.valid() ? "f is valid" :
-      "f is not valid") << std::endl; 
-     std::cout << (g.valid() ? "g is valid" :
-      "g is not valid") << std::endl; 
-
-     std::cout << "Return Value = " << a << std::endl;
+     k = 10;
+     std::thread t1(task, 15);
+     std::thread t2(task, 20);
+     t1.join();
+     t2.join();
+     task(k);
  }
