@@ -1,5 +1,5 @@
-// Packaged Task
- // packaged_task.cpp
+// Asynchronous Launch
+ // async.cpp
 
  #include <iostream>
  #include <thread>
@@ -8,9 +8,7 @@
  double task(double x) { return x * 2; }
 
  int main() {
-     std::packaged_task<double(double)> pt(task); 
-     auto f = pt.get_future();
-     pt(10);
+     std::future<double> f = std::async(task, 10); 
      double r = f.get();
      std::cout << "Result = " << r << std::endl; 
  }
