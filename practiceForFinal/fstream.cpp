@@ -1,18 +1,16 @@
-// Promise - Future
- // promise_future.cpp
+// Packaged Task
+ // packaged_task.cpp
 
  #include <iostream>
  #include <thread>
  #include <future>
 
- void task(std::promise<double>& p) {
-     p.set_value(12.34);
- }
+ double task(double x) { return x * 2; }
 
  int main() {
-     std::promise<double> p;
-     std::future<double> f = p.get_future();
-     std::thread t(task, std::ref(p));
-     std::cout << "Value = " << f.get()<< std::endl; 
-     t.join();
+     std::packaged_task<double(double)> pt(task); 
+     auto f = pt.get_future();
+     pt(10);
+     double r = f.get();
+     std::cout << "Result = " << r << std::endl; 
  }
