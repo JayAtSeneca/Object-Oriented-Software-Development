@@ -1,23 +1,23 @@
-// Unique Ownership
- // unique_ptr.cpp
+// Thread Class
+ // thread.cpp
 
  #include <iostream>
- #include <memory>
- #include "Title.h"
+ #include <string>
+ #include <thread>
 
- void display(const char* s) {
-     std::unique_ptr<Title> t(new Title(s));
-     t->display();
+ void task(const std::string& str) {
+     std::cout << str + " says Hi\n";
  }
 
  int main() {
-     const char* s[] = {"Mr.", "Ms.", "", "Dr."};
+     // spawn child thread t1
+     std::thread t1(task, "t1");
+     // spawn child thread t2
+     std::thread t2(task, "t2");
+     // continue executing main thread
+     task("main");
 
-     for (auto x : s) {
-         try {
-             display(x);
-         } catch(const char* msg) {
-             std::cerr << msg << std::endl;
-         }
-     }
+     // synchronize - IMPORTANT!
+     t2.join();
+     t1.join();
  }
