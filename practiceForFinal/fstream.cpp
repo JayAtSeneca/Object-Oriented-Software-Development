@@ -1,24 +1,18 @@
-// Thread Class - Lambda Expression
- // thread_id_lambda.cpp
+// Promise - Future
+ // promise_future.cpp
 
  #include <iostream>
  #include <thread>
- #include <vector>
+ #include <future>
 
- const int NT = 10;
+ void task(std::promise<double>& p) {
+     p.set_value(12.34);
+ }
 
  int main() {
-     // create a vector of not-joinable threads
-     std::vector<std::thread> threads;
-
-     // launch the execution of each thread
-     for (int i = 0; i < NT; i++)
-         threads.push_back(std::thread([=]() {
-             std::cout << i << " Thread id = " <<
-              std::this_thread::get_id() << std::endl; 
-         })); 
-
-     // synchronize their execution here
-     for (auto& thread : threads)
-         thread.join();
+     std::promise<double> p;
+     std::future<double> f = p.get_future();
+     std::thread t(task, std::ref(p));
+     std::cout << "Value = " << f.get()<< std::endl; 
+     t.join();
  }
