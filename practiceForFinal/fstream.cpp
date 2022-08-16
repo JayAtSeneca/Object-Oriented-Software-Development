@@ -1,25 +1,23 @@
-#ifndef SHAPE_H
- #define SHAPE_H
- // Multiple Inheritance - Shape
- // Shape.h
+// Multiple Inheritance - Cube
+ // Cube.h
 
- class Shape {
-   public:
-     virtual double volume()
-      const = 0; 
+ #include "Shape.h"
+
+ class Cube : public Shape {
+     double len;
+ public:
+     Cube(double);
+     double volume() const;
  };
- #endif
 
-#ifndef EMITTER_H
- #define EMITTER_H
- // Multiple Inheritance - Emitter
- // Emitter.h
+ // Multiple Inheritance - LitObj
+ // LitObj.h
 
- typedef unsigned long int ulong;
+ #include "Emitter.h"
 
- class Emitter {
-   public:
-     virtual ulong emission()
-      const = 0; 
+ class LitObj : public Emitter {
+     ulong color;
+ public:
+     LitObj(ulong c);
+     ulong emission() const; 
  };
- #endif
