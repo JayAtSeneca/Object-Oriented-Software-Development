@@ -1,24 +1,25 @@
-// Thread Local Storage Duration
- // thread_local.cpp
+#ifndef SHAPE_H
+ #define SHAPE_H
+ // Multiple Inheritance - Shape
+ // Shape.h
 
- #include <iostream>
- #include <sstream>
- #include <thread>
+ class Shape {
+   public:
+     virtual double volume()
+      const = 0; 
+ };
+ #endif
 
- thread_local int k = 0;
+#ifndef EMITTER_H
+ #define EMITTER_H
+ // Multiple Inheritance - Emitter
+ // Emitter.h
 
- void task(int i) {
-     k = i;
-     std::stringstream s;
-     s << k << " at " << &k << std::endl; 
-     std::cout << s.str();
- }
+ typedef unsigned long int ulong;
 
- int main() {
-     k = 10;
-     std::thread t1(task, 15);
-     std::thread t2(task, 20);
-     t1.join();
-     t2.join();
-     task(k);
- }
+ class Emitter {
+   public:
+     virtual ulong emission()
+      const = 0; 
+ };
+ #endif
