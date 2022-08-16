@@ -1,23 +1,22 @@
 // Multiple Inheritance - Cube
- // Cube.h
+ // Cube.cpp
 
- #include "Shape.h"
+ #include "Cube.h"
 
- class Cube : public Shape {
-     double len;
- public:
-     Cube(double);
-     double volume() const;
- };
+ Cube::Cube(double l) : len(l) {} 
 
- // Multiple Inheritance - LitObj
- // LitObj.h
+ double Cube::volume() const {
+     return len * len * len;
+ }
 
- #include "Emitter.h"
+// Multiple Inheritance - LitObj
+ // LitObj.cpp
 
- class LitObj : public Emitter {
-     ulong color;
- public:
-     LitObj(ulong c);
-     ulong emission() const; 
- };
+ #include "LitObj.h"
+
+ LitObj::LitObj(ulong c) :
+  color(c) {} 
+
+ ulong LitObj::emission() const {
+     return color;
+ }
