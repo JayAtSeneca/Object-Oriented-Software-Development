@@ -1,18 +1,20 @@
 // Iterators - Insertion and Removal
- // iterator_list.cpp
+ // iterator_deque.cpp
 
- #include <list>
+ #include <deque>
  #include <iostream>
 
  int main() {
-     std::list<double> prices;  // initially empty
+     std::deque<double> p(3, 10.50);
 
-     prices.push_back(10.43);   // add 10.43
-     prices.push_back(20.54);   // add 20.54
-     prices.push_back(32.43);   // add 32.43
-     prices.insert(--prices.end(), 12.52);
-     prices.erase(++prices.begin());
-     for(auto i = prices.begin(); i != prices.end(); i++) 
+     p.back() = 32.43;   // reset last 
+     p.erase(p.begin()); // remove first
+     for(auto i = p.begin(); i != p.end(); i++) 
+         std::cout << *i << "  ";
+     std::cout << std::endl;
+     p.insert(++p.begin(), 15.64);
+     p.insert(p.end(), 20.31);
+     for(auto i = p.begin(); i != p.end(); i++)
          std::cout << *i << "  ";
      std::cout << std::endl;
  }
