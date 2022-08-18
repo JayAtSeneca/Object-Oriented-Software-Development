@@ -1,19 +1,19 @@
-// Container Adapters - Stacks
- // ca_stack.cpp
+// Container Adapters - Queues
+ // ca_queue.cpp
 
- #include <stack>
+ #include <queue>
  #include <iostream>
 
  int main() {
-     std::stack<double> prices; // initially empty 
+     std::queue<int> tickets; // initially empty 
 
-     prices.push(10.43); // add 10.43
-     prices.push(20.54); // add 20.54
-     prices.push(32.43); // add 32.43
-     prices.top() = 5.41;
-     while(!prices.empty()) {
-         std::cout << prices.top() << "  ";
-         prices.pop();
+     tickets.push(10); // add 10
+     tickets.push(20); // add 20
+     tickets.push(32); // add 32
+     tickets.back() = 30;
+     while(!tickets.empty()) {
+         std::cout << tickets.front() << "  ";
+         tickets.pop();
      }
      std::cout << std::endl;
  }
