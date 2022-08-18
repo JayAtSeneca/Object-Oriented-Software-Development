@@ -1,19 +1,17 @@
-// Container Adapters - Queues
- // ca_queue.cpp
+// Iterators - Vectors
+ // iterator.cpp
 
- #include <queue>
+ #include <vector>
  #include <iostream>
 
  int main() {
-     std::queue<int> tickets; // initially empty 
+     std::vector<double> prices;  // initially empty
+     std::vector<double>::iterator i;
 
-     tickets.push(10); // add 10
-     tickets.push(20); // add 20
-     tickets.push(32); // add 32
-     tickets.back() = 30;
-     while(!tickets.empty()) {
-         std::cout << tickets.front() << "  ";
-         tickets.pop();
-     }
+     prices.push_back(10.43); // add 10.43
+     prices.push_back(20.54); // add 20.54
+     prices.push_back(32.43); // add 32.43
+     for(i = prices.begin(); i != prices.end(); i++) 
+         std::cout << *i << "  ";
      std::cout << std::endl;
  }
